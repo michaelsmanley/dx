@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# A script to automate the release process.
+#
+# USAGE:
+#   ./bin/release [patch|minor|major]
+#
+# This script will:
+# 1. Ensure the git working directory is clean.
+# 2. Determine the new version number based on the argument (patch, minor, major).
+# 3. Update the VERSION file.
+# 4. Commit the version change.
+# 5. Tag the commit with the new version.
+# 6. Print instructions on how to push the release.
+
+set -e
+set -o pipefail
+
+cd "$(dirname "$0")/.." # Run from project root
+
+if ! git diff --quiet; then
+  echo "Git working directory is not clean. Please commit or stash your changes."
+  exit 1
+fi
+
+if ! git diff --cached --quiet; then
+    echo "Git working directory is not clean. There are staged changes."
+    exit 1
+fi
+
+BUMP=${1:-patch}
+if [[ "$BUMP" != "patch" && "$BUMP" != "minor" && "$BUMP" != "major" ]]; then
+  echo "Invalid bump type: '$BUMP'. Use 'patch', 'minor', or 'major'."
+  echo "Usage: ./bin/release [patch|minor|major]"
+  exit 1
+fi
+
+OLD_VERSION=$(cat VERSION)
+IFS='.' read -r -a VERSION_BITS <<< "$OLD_VERSION"
+MAJOR=${VERSION_BITS[0]}
+MINOR=${VERSION_BITS[1]}
+PATCH=${VERSION_BITS[2]}
+
+case "$BUMP" in
+  major)
+    MAJOR=$((MAJOR + 1))
+    MINOR=0
+    PATCH=0
+    ;;
+  minor)
+    MINOR=$((MINOR + 1))
+    PATCH=0
+    ;;
+  patch)
+    PATCH=$((PATCH + 1))
+    ;;
+esac
+
+NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+NEW_TAG="v$NEW_VERSION"
+
+echo "Releasing version $NEW_TAG..."
+
+echo "$NEW_VERSION" > VERSION
+
+git add VERSION
+git commit -m "chore(release): $NEW_TAG"
+git tag -a "$NEW_TAG" -m "Version $NEW_TAG"
+
+echo ""
+echo "Release $NEW_TAG is created locally."
+echo "To publish, run:"
+echo "  git push && git push --tags"

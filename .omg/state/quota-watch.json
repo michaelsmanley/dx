@@ -1,0 +1,10 @@
+{
+  "turn_count": 5,
+  "last_session_id": "5f975b15-6508-4e54-b535-246c2a877022",
+  "last_event_key": "5f975b15-6508-4e54-b535-246c2a877022:transcript:00aec7fab2d14e6a27d1faaa75c00542e6cd9281c87723ebcb0a2978d3065eb7",
+  "last_transcript_hash": "00aec7fab2d14e6a27d1faaa75c00542e6cd9281c87723ebcb0a2978d3065eb7",
+  "last_model": "gemini-2.5-pro",
+  "last_turn_total_tokens": 11430,
+  "last_session_total_tokens": 105666,
+  "updated_at": "2026-03-29T16:41:30.538Z"
+}

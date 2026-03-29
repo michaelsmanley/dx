@@ -9,5 +9,9 @@ This repo contains the bash scripts and Dockerfile templates for creating a deve
 1. Clone or check out the repo locally.
 2. Run `bin/install -h` to read the installation help.
 3. Gather all of the details for your project:
-    1. 
+    1. Details TODO
+4. When making changes, please update `docs/CHANGELOG.md` following the Keep a Changelog guidelines.
 
+## How to Add Templates
+
+TODO
