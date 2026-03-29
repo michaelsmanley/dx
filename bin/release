@@ -62,6 +62,14 @@ if [[ "$BUMP" != "patch" && "$BUMP" != "minor" && "$BUMP" != "major" ]]; then
 fi
 
 OLD_VERSION=$(cat VERSION)
+
+# Check for new commits
+COMMIT_COUNT=$(git rev-list "v$OLD_VERSION"..HEAD --count)
+if [ "$COMMIT_COUNT" -eq 0 ]; then
+  echo "No new commits since v$OLD_VERSION. Nothing to release."
+  exit 0
+fi
+
 IFS='.' read -r -a VERSION_BITS <<< "$OLD_VERSION"
 MAJOR=${VERSION_BITS[0]}
 MINOR=${VERSION_BITS[1]}
