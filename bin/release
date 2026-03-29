@@ -65,14 +65,11 @@ echo "$NEW_VERSION" > VERSION
 
 # Update Changelog
 CHANGELOG_FILE="docs/CHANGELOG.md"
-CHANGELOG_ENTRY="## [$NEW_VERSION] - $(date +'%Y-%m-%d')
+CHANGELOG_ENTRY="\n## [$NEW_VERSION] - $(date +'%Y-%m-%d')\n\n$(git log "v$OLD_VERSION"..HEAD --oneline --pretty=format:'- %h %s')\n"
 
-$(git log "v$OLD_VERSION"..HEAD --oneline --pretty=format:'- %h %s')
-
-"
-# Read existing changelog, remove the first 2 lines (header and blank line), and prepend the new entry
-EXISTING_CHANGELOG=$(tail -n +3 "$CHANGELOG_FILE")
-echo -e "# Changelog\n\n$CHANGELOG_ENTRY$EXISTING_CHANGELOG" > "$CHANGELOG_FILE"
+# Insert the new entry after the '---' line
+sed -i "/---/a\\
+$CHANGELOG_ENTRY" "$CHANGELOG_FILE"
 
 
 git add VERSION "$CHANGELOG_FILE"
