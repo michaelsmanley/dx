@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.16] - 2026-03-29
+
+- c280101 feat: update environment configuration and documentation
+
+
 ## [0.0.15] - 2026-03-29
 
 - 9c1df49 fix: update changelog entry insertion to use a temporary file for portability
@@ -74,6 +79,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.16] - 2026-03-29
+
+- c280101 feat: update environment configuration and documentation
+
 
 ## [0.0.15] - 2026-03-29
 
