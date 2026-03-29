@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.14] - 2026-03-29
+
+- cafe0e1 feat: add success message after local release creation
+
+
 ## [0.0.13] - 2026-03-29
 
 - e8a6f5a fix: add check for new commits before releasing
@@ -64,6 +69,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.14] - 2026-03-29
+
+- cafe0e1 feat: add success message after local release creation
+
 
 ## [0.0.13] - 2026-03-29
 
