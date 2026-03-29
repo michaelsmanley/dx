@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.7] - 2026-03-29
+
+- 019363c fix: make release script insert changes elsewhere
+
+
 ## [0.0.6] - 2026-03-29
 
 - 408805c small edit
@@ -29,5 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.7] - 2026-03-29
+
+- 019363c fix: make release script insert changes elsewhere
+
 
 This file was created on 2026-03-27.
