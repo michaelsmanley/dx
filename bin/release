@@ -20,13 +20,21 @@ cd "$(dirname "$0")/.." # Run from project root
 
 DRY_RUN=false
 PUSH_CHANGES=false
-while getopts "dp" opt; do
+while getopts "dph" opt; do
   case $opt in
     d)
       DRY_RUN=true
       ;;
     p)
       PUSH_CHANGES=true
+      ;;
+    h)
+      echo "Usage: $0 [options] [patch|minor|major]"
+      echo "Options:"
+      echo "  -d    Dry run (don't actually make changes)"
+      echo "  -p    Push changes to remote after release"
+      echo "  -h    Show this help message"
+      exit 0
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -76,19 +84,23 @@ esac
 
 NEW_VERSION="$MAJOR.$MINOR.$PATCH"
 NEW_TAG="v$NEW_VERSION"
+CHANGELOG_ENTRY="\n## [$NEW_VERSION] - $(date +'%Y-%m-%d')\n\n$(git log "v$OLD_VERSION"..HEAD --oneline --pretty=format:'- %h %s')\n"
+CHANGELOG_FILE="docs/CHANGELOG.md"
+
+if [ $DRY_RUN = true ]; then
+  echo "Dry run mode enabled. No changes will be made."
+  echo "New version would be: $NEW_VERSION"
+  echo "Changelog entry would be:"
+  echo -e "$CHANGELOG_ENTRY"
+  exit 0
+fi
 
 echo "Releasing version $NEW_TAG..."
-
 echo "$NEW_VERSION" > VERSION
-
-# Update Changelog
-CHANGELOG_FILE="docs/CHANGELOG.md"
-CHANGELOG_ENTRY="\n## [$NEW_VERSION] - $(date +'%Y-%m-%d')\n\n$(git log "v$OLD_VERSION"..HEAD --oneline --pretty=format:'- %h %s')\n"
 
 # Insert the new entry after the '---' line
 sed -i "/---/a\\
 $CHANGELOG_ENTRY" "$CHANGELOG_FILE"
-
 
 git add VERSION "$CHANGELOG_FILE"
 git commit -m "chore(release): $NEW_TAG"
@@ -97,9 +109,4 @@ git tag -a "$NEW_TAG" -m "Version $NEW_TAG"
 if [ "$PUSH_CHANGES" = true ]; then
   echo "Pushing release $NEW_TAG to remote..."
   git push && git push --tags
-else
-  echo ""
-  echo "Release $NEW_TAG is created locally."
-  echo "To publish, run:"
-  echo "  git push && git push --tags"
 fi
