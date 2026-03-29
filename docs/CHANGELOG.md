@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.15] - 2026-03-29
+
+- 9c1df49 fix: update changelog entry insertion to use a temporary file for portability
+
+
 ## [0.0.14] - 2026-03-29
 
 - cafe0e1 feat: add success message after local release creation
@@ -69,6 +74,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.15] - 2026-03-29
+
+- 9c1df49 fix: update changelog entry insertion to use a temporary file for portability
+
 
 ## [0.0.14] - 2026-03-29
 
