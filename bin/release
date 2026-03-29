@@ -63,7 +63,19 @@ echo "Releasing version $NEW_TAG..."
 
 echo "$NEW_VERSION" > VERSION
 
-git add VERSION
+# Update Changelog
+CHANGELOG_FILE="docs/CHANGELOG.md"
+CHANGELOG_ENTRY="## [$NEW_VERSION] - $(date +'%Y-%m-%d')
+
+$(git log "v$OLD_VERSION"..HEAD --oneline --pretty=format:'- %h %s')
+
+"
+# Read existing changelog, remove the first 2 lines (header and blank line), and prepend the new entry
+EXISTING_CHANGELOG=$(tail -n +3 "$CHANGELOG_FILE")
+echo -e "# Changelog\n\n$CHANGELOG_ENTRY$EXISTING_CHANGELOG" > "$CHANGELOG_FILE"
+
+
+git add VERSION "$CHANGELOG_FILE"
 git commit -m "chore(release): $NEW_TAG"
 git tag -a "$NEW_TAG" -m "Version $NEW_TAG"
 

@@ -23,7 +23,11 @@ This skill uses the following tools:
 
 ## Instructions
 
-Your goal is to create a new release, tag it, and push it to the remote repository.
+Your goal is to document and create a new release, tag it, and push it to the remote repository.
+
+First, you will need to update `docs/CHANGELOG.md` with the new release information. Make sure to include the new version number, release date, and a summary of changes based on the commit history which should include conventional commit messages.
+
+Next, follow these steps to create and push the new release:
 
 1.  You will be given a `BUMP_TYPE` as an argument, which can be `patch`, `minor`, or `major`. If no `BUMP_TYPE` is provided, you should default to `patch`.
 2.  Execute the `bin/release` script located in the project root, passing the `BUMP_TYPE` as an argument. For example: `./bin/release patch`.
