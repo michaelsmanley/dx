@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.11] - 2026-03-29
+
+
+
+
 ## [0.0.10] - 2026-03-29
 
 
@@ -49,6 +54,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.11] - 2026-03-29
+
+
+
 
 ## [0.0.10] - 2026-03-29
 
