@@ -105,13 +105,13 @@ fi
 echo "Releasing version $NEW_TAG..."
 
 
-# Insert the new entry after the '---' line in a portable way
-TMP_CHANGELOG=$(mktemp)
-sed "/---/a\\
-$CHANGELOG_ENTRY" "$CHANGELOG_FILE" > "$TMP_CHANGELOG"
-mv "$TMP_CHANGELOG" "$CHANGELOG_FILE"
+# Insert the new entry after the '---' line using a temporary file for portability
+TMP_CHANGELOG_ENTRY_FILE=$(mktemp)
+echo -e "$CHANGELOG_ENTRY" > "$TMP_CHANGELOG_ENTRY_FILE"
+sed -i "/---/r $TMP_CHANGELOG_ENTRY_FILE" "$CHANGELOG_FILE"
+rm "$TMP_CHANGELOG_ENTRY_FILE" # Clean up temp file
 git add "$CHANGELOG_FILE"
-git commit -m "chore(release): $NEW_TAG"
+
 
 git tag -a "$NEW_TAG" -m "Version $NEW_TAG"
 
@@ -121,6 +121,5 @@ echo ""
 
 if [ "$PUSH_CHANGES" = true ]; then
   echo "Pushing release $NEW_TAG to remote..."
-  git push
   git push --tags
 fi
