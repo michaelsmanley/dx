@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.19] - 2026-04-03
+
+- fafe7d2 feat: automate changelog update for version 0.0.18
+
+
 ## [0.0.18] - 2026-04-03
 
 - 00f52c6 feat: update changelog for version 0.0.17 and add spec documentation
@@ -89,6 +94,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version is now stored in a `VERSION` file instead of `README.md`.
 
 ---
+
+## [0.0.19] - 2026-04-03
+
+- fafe7d2 feat: automate changelog update for version 0.0.18
+
 
 ## [0.0.18] - 2026-04-03
 
